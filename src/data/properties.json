@@ -1,0 +1,48 @@
+[{
+  "Id": 1,
+  "SellRent": 1,
+  "Price" : 12333,
+  "Type": "House1",
+  "Name": "Bagel Street 2",
+  "Image": "prop-1"
+},
+{
+  "Id": 2,
+  "SellRent": 2,
+  "Price" : 12123123,
+  "Type": "House2",
+  "Name": "Bagel Street 2",
+  "Image": "prop-2"
+},
+{
+  "Id": 3,
+  "SellRent": 1,
+  "Price" : 1254545,
+  "Type": "House3",
+  "Name": "Bagel Street 2",
+  "Image": "prop-3"
+},
+{
+  "Id": 4,
+  "SellRent": 2,
+  "Price" : 12333,
+  "Type": "House1",
+  "Name": "Bagel Street 2",
+  "Image": "prop-4"
+},
+{
+  "Id": 5,
+  "SellRent": 1,
+  "Price" : 12123123,
+  "Type": "House2",
+  "Name": "Bagel Street 2",
+  "Image": "prop-5"
+},
+{
+  "Id": 6,
+  "SellRent": 2,
+  "Price" : 1254545,
+  "Type": "House3",
+  "Name": "Bagel Street 2"
+}
+]
