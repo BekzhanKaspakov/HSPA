@@ -19,7 +19,10 @@
     {{property.City}}
 
     <h6 class="mt-2">{{property.FType}}
-    <span *ngIf="property.FType !== 'Unfurnished'"> Furnished </span> | Ready to Move</h6>
+      <span *ngIf="property.FType !== 'Unfurnished'"> Furnished </span> |
+      <span *ngIf="property.RTM === 1"> Ready to move </span>
+      <span *ngIf="property.RTM !== 1"> NOT ready to move </span>
+    </h6>
 
     <hr class="mt-0 mb-2">
 

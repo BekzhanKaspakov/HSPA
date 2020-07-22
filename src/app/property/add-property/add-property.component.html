@@ -146,14 +146,27 @@
                   </div>
               </tab>
               <tab heading="Other Details" formGroupName="OtherInfo">
-                <div class="form-group btnRadioGroup col-12" formControlName="RTM">
+                <div class="form-group col-12">
+                  <p>Ready to move</p>
+                  <div class="btn-group" btnRadioGroup formControlName="RTM" name="RTM"
+                    [(ngModel)]="propertyView.RTM">
+                    <label *ngFor="let rtm of [1,2]"
+                    class="btn btn-outline-primary mr-2"
+                    [btnRadio]="rtm" role="button" name="SellRent">
+                      <span *ngIf="rtm === 1">Yes</span>
+                      <span *ngIf="rtm !== 1">No</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- <div class="form-group btnRadioGroup col-12">
                   <label>Ready to Move</label><br/>
                   <input type="radio" id='Yes' value='1'>
                   <label class="m-2">Yes</label>
 
                   <input type="radio" id="No" value='2'>
                   <label class="m-2">No</label>
-                </div>
+                </div> -->
 
                 <div class="form-group col-4">
                   <label>Possession/Avaialble From</label>

@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { IProperty } from 'src/app/model/iproperty';
 import { Observable } from 'rxjs';
 import { Property } from '../model/property';
+import { JsonPipe } from '@angular/common';
 
 
 @Injectable({
@@ -17,6 +18,15 @@ getAllProperties(SellRent: number ): Observable<Array<IProperty>> {
   return this.http.get('data/properties.json').pipe(
     map( data => {
       const propertiesArray: Array<IProperty> = [];
+      const localProperties = JSON.parse(localStorage.getItem('newProp'));
+      if (localProperties) {
+        for (const id in localProperties) {
+          if (localProperties.hasOwnProperty(id) && localProperties[id].SellRent === SellRent) {
+            propertiesArray.push(localProperties[id])
+          }
+        }
+      }
+
       for (const id in data) {
         if (data.hasOwnProperty(id) && data[id].SellRent === SellRent) {
           propertiesArray.push(data[id])
@@ -29,7 +39,22 @@ getAllProperties(SellRent: number ): Observable<Array<IProperty>> {
 }
 
 addProperty(property: Property) {
-  localStorage.setItem('newProp', JSON.stringify(property));
+  let newProp = [property];
+  // let existing = localStorage.getItem('newProp');
+  if (localStorage.getItem('newProp')) {
+    newProp = [property , ... JSON.parse(localStorage.getItem('newProp'))];
+  }
+  localStorage.setItem('newProp', JSON.stringify(newProp));
+}
+
+newPropId(): number {
+  if (localStorage.getItem('PID')) {
+    localStorage.setItem('PID', String(+localStorage.getItem('PID') + 1));
+    return +localStorage.getItem('PID');
+  } else {
+    localStorage.setItem('PID', '101');
+    return 101;
+  }
 }
 
 }
