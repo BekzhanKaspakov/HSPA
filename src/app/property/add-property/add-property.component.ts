@@ -38,7 +38,7 @@ export class AddPropertyComponent implements OnInit {
               private alertify: AlertifyService,
               private housingService: HousingService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.addPropertyForm = this.fb.group({
       BasicInfo: this.fb.group({
         SellRent: ['1' , Validators.required],
@@ -75,33 +75,38 @@ export class AddPropertyComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.allTabsValid()) {
       this.mapProperty();
-      this.housingService.addProperty(this.property);
-      this.alertify.success('Congrats, your property listed successfully on our website');
-      console.log(this.addPropertyForm);
-
-      if(this.SellRent.value === '2') {
-        this.router.navigate(['/rent-property']);
-      } else {
-        this.router.navigate(['/']);
-      }
-
+      const newProperty: Omit<Property, 'id'> = Object.assign({}, this.property);
+      this.housingService.postProperty(newProperty).then((ok) =>
+        {
+          if (ok) {
+            this.alertify.success('Congrats, your property listed successfully on our website');
+            console.log(this.addPropertyForm);
+            if (this.SellRent.value === '2') {
+              this.router.navigate(['/rent-property']);
+            } else {
+              this.router.navigate(['/']);
+            }
+          } else {
+            this.alertify.error('Something wrong happened to your request, please try again later');
+          }
+        }
+      );
 
     } else {
       this.alertify.error('Please review the form and provide all valid entries');
     }
   }
 
-  selectTab(tabId: number, isCurrentValid: boolean) {
+  selectTab(tabId: number, isCurrentValid: boolean): void {
     if (isCurrentValid) {
       this.staticTabs.tabs[tabId].active = true;
     }
   }
 
   mapProperty(): void {
-    this.property.Id = this.housingService.newPropId();
     this.property.SellRent = +this.SellRent.value;
     this.property.BHK = this.BHK.value;
     this.property.PType = this.PType.value;
@@ -152,105 +157,105 @@ export class AddPropertyComponent implements OnInit {
 
 //#region <Getter Methods>
 // #region <FormGroups>
-    get BasicInfo() {
+    get BasicInfo(): FormGroup {
       return this.addPropertyForm.controls.BasicInfo as FormGroup;
     }
 
-    get PriceInfo() {
+    get PriceInfo(): FormGroup {
       return this.addPropertyForm.controls.PriceInfo as FormGroup;
     }
 
-    get AddressInfo() {
+    get AddressInfo(): FormGroup {
       return this.addPropertyForm.controls.AddressInfo as FormGroup;
     }
 
-    get OtherInfo() {
+    get OtherInfo(): FormGroup {
       return this.addPropertyForm.controls.OtherInfo as FormGroup;
     }
 // #endregion
 
 //#region <Form Controls>
-    get SellRent() {
+    get SellRent(): FormControl {
       return this.BasicInfo.controls.SellRent as FormControl;
     }
 
-    get BHK() {
+    get BHK(): FormControl {
       return this.BasicInfo.controls.BHK as FormControl;
     }
 
-    get PType() {
+    get PType(): FormControl {
       return this.BasicInfo.controls.PType as FormControl;
     }
 
-    get FType() {
+    get FType(): FormControl {
       return this.BasicInfo.controls.FType as FormControl;
     }
 
-    get Name() {
+    get Name(): FormControl {
       return this.BasicInfo.controls.Name as FormControl;
     }
 
-    get City() {
+    get City(): FormControl {
       return this.BasicInfo.controls.City as FormControl;
     }
 
-    get Price() {
+    get Price(): FormControl {
       return this.PriceInfo.controls.Price as FormControl;
     }
 
-    get BuiltArea() {
+    get BuiltArea(): FormControl {
       return this.PriceInfo.controls.BuiltArea as FormControl;
     }
 
-    get CarpetArea() {
+    get CarpetArea(): FormControl {
       return this.PriceInfo.controls.CarpetArea as FormControl;
     }
 
-    get Security() {
+    get Security(): FormControl {
       return this.PriceInfo.controls.Security as FormControl;
     }
 
-    get Maintenance() {
+    get Maintenance(): FormControl {
       return this.PriceInfo.controls.Maintenance as FormControl;
     }
 
-    get FloorNo() {
+    get FloorNo(): FormControl {
       return this.AddressInfo.controls.FloorNo as FormControl;
     }
 
-    get TotalFloor() {
+    get TotalFloor(): FormControl {
       return this.AddressInfo.controls.TotalFloor as FormControl;
     }
 
-    get Address() {
+    get Address(): FormControl {
       return this.AddressInfo.controls.Address as FormControl;
     }
 
-    get LandMark() {
+    get LandMark(): FormControl {
       return this.AddressInfo.controls.LandMark as FormControl;
     }
 
-    get RTM() {
+    get RTM(): FormControl {
       return this.OtherInfo.controls.RTM as FormControl;
     }
 
-    get PossessionOn() {
+    get PossessionOn(): FormControl {
       return this.OtherInfo.controls.PossessionOn as FormControl;
     }
 
-    get AOP() {
+    get AOP(): FormControl {
       return this.OtherInfo.controls.AOP as FormControl;
     }
 
-    get Gated() {
+    get Gated(): FormControl {
       return this.OtherInfo.controls.Gated as FormControl;
     }
 
-    get MainEntrance() {
+    get MainEntrance(): FormControl {
       return this.OtherInfo.controls.MainEntrance as FormControl;
     }
 
-    get Description() {
+    get Description(): FormControl {
       return this.OtherInfo.controls.Description as FormControl;
     }
 

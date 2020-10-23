@@ -38,23 +38,14 @@ getAllProperties(SellRent: number ): Observable<Array<IProperty>> {
   );
 }
 
-addProperty(property: Property): void {
-  let newProp = [property];
-  // let existing = localStorage.getItem('newProp');
-  if (localStorage.getItem('newProp')) {
-    newProp = [property , ... JSON.parse(localStorage.getItem('newProp'))];
-  }
-  localStorage.setItem('newProp', JSON.stringify(newProp));
-}
+async postProperty(property: Property): Promise<boolean> {
+  console.log(JSON.stringify(property));
+  const response = await fetch('http://localhost:8080/property', {
+    method: 'POST',
+    body: JSON.stringify(property),
+    headers: {'Content-Type': 'application/json'} });
 
-newPropId(): number {
-  if (localStorage.getItem('PID')) {
-    localStorage.setItem('PID', String(+localStorage.getItem('PID') + 1));
-    return +localStorage.getItem('PID');
-  } else {
-    localStorage.setItem('PID', '101');
-    return 101;
-  }
+  return response.ok;
 }
 
 }
