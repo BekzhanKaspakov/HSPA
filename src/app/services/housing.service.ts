@@ -12,24 +12,24 @@ import { JsonPipe } from '@angular/common';
 })
 export class HousingService {
 
-constructor(private http:HttpClient) { }
+constructor(private http: HttpClient) { }
 
 getAllProperties(SellRent: number ): Observable<Array<IProperty>> {
-  return this.http.get('data/properties.json').pipe(
+  return this.http.get('http://localhost:8080/properties').pipe(
     map( data => {
       const propertiesArray: Array<IProperty> = [];
       const localProperties = JSON.parse(localStorage.getItem('newProp'));
       if (localProperties) {
         for (const id in localProperties) {
           if (localProperties.hasOwnProperty(id) && localProperties[id].SellRent === SellRent) {
-            propertiesArray.push(localProperties[id])
+            propertiesArray.push(localProperties[id]);
           }
         }
       }
 
       for (const id in data) {
         if (data.hasOwnProperty(id) && data[id].SellRent === SellRent) {
-          propertiesArray.push(data[id])
+          propertiesArray.push(data[id]);
         }
       }
       return propertiesArray;
@@ -38,7 +38,7 @@ getAllProperties(SellRent: number ): Observable<Array<IProperty>> {
   );
 }
 
-addProperty(property: Property) {
+addProperty(property: Property): void {
   let newProp = [property];
   // let existing = localStorage.getItem('newProp');
   if (localStorage.getItem('newProp')) {

@@ -1,5 +1,5 @@
 .card {
-  min-height: 400px;
+  min-height: 350px;
 }
 
 .card-body h1 {
@@ -16,22 +16,45 @@
   transform: scale(1.2, 1.2);
   transition-duration: 500ms;
   transition-timing-function: ease-out;
-  height: 250px;
-  width: 250px;
+  height: auto;
+  width: auto;
+  max-height: 200px;
+  max-width: 340px;
   opacity: 0.5;
 }
+
+/*.card img {*/
+/*  transform: scale(1, 1);*/
+/*  transition-duration: 500ms;*/
+/*  transition-timing-function: ease-out;*/
+/*  height: 250px;*/
+/*  width: 250px;*/
+/*  display: block;*/
+/*  */
+/*}*/
+
 
 .card img {
   transform: scale(1, 1);
   transition-duration: 500ms;
   transition-timing-function: ease-out;
-  height: 250px;
-  width: 250px;
+  height: auto;
+  width: auto;
+  max-height: 200px;
+  max-width: 340px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .img-wrapper {
   overflow: hidden;
   position: relative;
+  height: 250px;
+  width: 450px;
+  margin-left: auto;
+  margin-right: auto;
+
 }
 
 .member-icons{

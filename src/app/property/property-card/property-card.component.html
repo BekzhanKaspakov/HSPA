@@ -1,6 +1,6 @@
-<div class="card text-center" style="width: 18rem;">
-  <div class="img-wrapper">
-    <img *ngIf="property.Image" class="card-img-top" src="assets/images/{{property.Image}}.jpg">
+<div class="card text-center" style="width: 340px">
+  <div class="img-wrapper" style="position:relative; width:100%; height:100%">
+    <img *ngIf="property.Image" class="card-img-top" src="{{property.Image}}">
     <img *ngIf="!property.Image" class="card-img-top" src="assets/images/house_default.png">
     <ul *ngIf="!hideIcons" class="list-inline text-center member-icons animate">
       <li class="list-inline-item">
